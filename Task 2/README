@@ -1,0 +1,69 @@
+Objective
+The objective of this task is to explore user accounts, understand access control, and practice working with file permissions in Linux as part of operating system hardening.
+
+Steps Performed
+1. Checked Current User
+Command:
+whoami
+Output: twin
+Explanation: Verified that the current user is a standard, non-root user. This ensures that all operations are performed safely without full administrative privileges.
+
+2. Listed All Users
+
+Command:
+cat /etc/passwd
+Output: System users such as sshd, www-data, mysql, postgres, and the regular user twin.
+Explanation:
+System accounts run services with limited privileges and are configured with non-login shells.
+Regular users such as twin have a user ID of 1000 or higher and are used for standard operations.
+The root account has a user ID of 0 and full administrative privileges.
+This demonstrates the principle of least privilege, which is a key part of system security.
+
+3. Checked User Groups
+
+Command:
+groups
+
+Output: Shows all groups that the user twin belongs to.
+Explanation: Group membership defines access rights to files and other system resources. It is important to audit these groups to enforce proper access control.
+
+4. Created a Standard User
+Command:
+sudo adduser testuser
+Explanation: A new standard user testuser was created to simulate an environment where administrative privileges are restricted. This is an important practice to limit the risk of accidental or malicious system changes.
+
+5. Switched to Standard User
+Command:
+su testuser
+
+Explanation: By switching to the standard user, it was confirmed that the user cannot perform administrative actions without using sudo. Attempting to install software without privileges demonstrates the enforced access control.
+6. Worked with File Permissions
+
+Commands and actions performed:
+touch demo.txt
+ls -l demo.txt
+chmod 700 demo.txt
+ls -l demo.txt
+sudo chown testuser:testuser demo.txt
+ls -l demo.txt
+
+Explanation:
+chmod 700 sets the file so that only the owner can read, write, and execute it.
+chown changes the file ownership to the standard user testuser.
+This demonstrates how file permissions and ownership are used to restrict access and enforce security policies.
+Screenshots:
+Screenshots were taken to provide proof of execution and include:
+Current user output from whoami
+/etc/passwd output showing system and regular users
+Creation of testuser
+File permission changes and ownership changes
+Permission error when a standard user attempts administrative action
+
+Conclusion:
+Task 2 confirms the following:
+Standard users have limited privileges, which reduces the risk to the system.
+Root users have full control and should be used only when necessary.
+System and service accounts follow the principle of least privilege, limiting potential damage if compromised.
+File permissions and ownership are effective mechanisms for enforcing access control and securing sensitive files.
+
+This task demonstrates the importance of managing user accounts, groups, and file permissions as part of operating system hardening.

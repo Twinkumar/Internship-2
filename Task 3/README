@@ -1,0 +1,49 @@
+Task 3: Networking Basics for Cybersecurity
+Objective:
+The goal here was to get a grip on basic networking stuff and dive into real live network traffic using packet capture tools. 
+It really shows how data moves around networks and how protocols work in actual use cases, which is super useful for cybersecurity.
+Environment:
+OS: Kali Linux (dual boot on bare metal)
+Network: Wi-Fi or USB tethering
+Tool: Wireshark
+Tool Description:
+Wireshark is this awesome network protocol analyzer that lets you capture and dig into packets live.
+It's a go-to for security folks to check out network behavior, spot weird stuff, and break down how protocols talk to each other
+Activities Performed
+Got Kali connected to the internet via Wi-Fi or USB tethering.
+Fired up Wireshark as root.
+Picked the active interface (wlan0).
+Started capturing traffic while I browsed some sites.
+Threw on some protocol filters to narrow it down.
+Watched a TCP connection get set up.
+Checked out both encrypted and non-encrypted traffic.
+Saved the capture file for later.
+Filters Used:
+Purpose	Wireshark Filter
+DNS traffic	dns
+TCP traffic	tcp
+HTTPS traffic	https
+TLS encrypted traffic	tls
+TCP three-way handshake	tcp.flags.syn == 1
+QUIC protocol	quic
+Observations:
+DNS Traffic
+I saw DNS queries and responses popping up. Domains got resolved to IPs, which makes sense—it's the first step before anything else happens.
+TCP Traffic:
+Tons of TCP packets for reliable data sending. Source/dest ports were clear, and it handles ordering and errors like a champ.
+TCP Three-Way Handshake:
+Filtered with tcp.flags.syn == 1 and caught the whole thing:
+SYN from client
+SYN-ACK from server
+ACK from client
+Pretty cool to see TCP connections happen live.
+Encrypted Traffic (HTTPS/TLS):
+Lots of TLSv1.x stuff. The "Application Data" was all encrypted—couldn't read a thing, which is exactly what you want for security.
+QUIC Protocol:
+Spotted QUIC too, which runs on UDP. Modern browsers love it for speed and security.
+Security Analysis:
+Plain-text traffic is a no-go—it leaks sensitive info. But HTTPS and TLS keep things locked down. 
+Analyzing packets like this helps you spot weak spots and threats. Knowing protocols inside out is key for defending networks.
+Conclusion:
+Hands-on with Wireshark was eye-opening. I captured and picked apart DNS, TCP, TLS, QUIC, and more. It really drove home how secure vs. insecure traffic works, and that's core for cybersecurity skills.
+

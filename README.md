@@ -1,1 +1,1 @@
-This repository consists of my Cyber Security Intership Tasks.
+This repository consists of my Cyber Security Internship Tasks.

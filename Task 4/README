@@ -1,0 +1,47 @@
+The goal of this task is to understand password hashing, generate different types of hashes, and attempt to crack them using John the Ripper with a wordlist. 
+This task demonstrates how weak passwords can be recovered and why strong hashing algorithms matter.
+Operating System: Kali Linux (Bare Metal / Dual Boot)
+Tools Used:
+   `md5sum`, `sha1sum`
+   `htpasswd`
+   `john` (John the Ripper)
+   `rockyou.txt` wordlist
+```bash
+echo -n "password123" | md5sum
+
+```bash
+echo -n "password123" | sha1sum
+
+```bash
+htpasswd -bnBC 10 "" password123 | tr -d ':\n'
+
+A hash file was created containing one hash per line.
+
+```bash
+echo "482c811da5d5b4bc6d497ffa98491e38" > hashes.txt
+
+The file was verified using:
+
+```bash
+wc -l hashes.txt
+This ensured that the file contained exactly one hash and no empty lines.
+
+The default Kali wordlist `rockyou.txt.gz` was extracted:
+
+```bash
+sudo gunzip /usr/share/wordlists/rockyou.txt.gz
+
+```bash
+john --format=raw-md5 hashes.txt --wordlist=/usr/share/wordlists/rockyou.txt
+```bash
+john --show --format=raw-md5 hashes.txt
+
+Weak hashes (MD5, SHA-1) were cracked successfully using the `rockyou.txt` wordlist.
+Stronger hashes (bcrypt) were not cracked, demonstrating better security.
+Hashing is a one-way process; passwords are not encrypted.
+Weak hashing algorithms like MD5 and SHA-1 are vulnerable to dictionary attacks.
+Proper file formatting (one hash per line) is critical for tools like John.
+Strong hashing algorithms such as bcrypt significantly improve password security.
+Conclusion:
+This task provided hands-on experience with password hashing and cracking techniques using Kali Linux. It highlights the importance of strong passwords and secure hashing algorithms in real-world systems.
+
